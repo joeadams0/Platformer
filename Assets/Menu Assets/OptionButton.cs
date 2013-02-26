@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Menu : MonoBehaviour 
+public class OptionButton : MonoBehaviour 
 {
 	private Color yell = new Color(.98F, .94F, 0);
 	private Color mar = new Color(.47F, .106F, .106F);
@@ -15,10 +15,16 @@ public class Menu : MonoBehaviour
 	void OnMouseOver()
 	{
 		renderer.material.color = mar;
+		//play sound
 	}
 	
 	void OnMouseExit()
 	{
 		renderer.material.color = gre;
+	}
+	
+	void OnMouseDown()
+	{
+		//blank until i know what to set
 	}
 }
