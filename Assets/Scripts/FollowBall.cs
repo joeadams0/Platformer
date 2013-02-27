@@ -6,13 +6,14 @@ using System.Collections;
 
 public class FollowBall : MonoBehaviour 
 {
-	public Vector3 target; //drag object onto script to follow
-
+	public GameObject player; //drag object onto script to follow
+	private Vector3 target;
+	
 // Rotate the camera every frame so it keeps looking at the target 
-void Update() 
-	{
-			target = GameObject.FindGameObjectWithTag("Player").transform.position;
-	   		transform.LookAt(target);
+	void Update() 
+		{
+		target = player.transform.position;
+	   	transform.LookAt(target);
 		}
-		/* turns light off if not in play */
 }
+

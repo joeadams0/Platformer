@@ -25,7 +25,7 @@ public class PlayButton : MonoBehaviour
 	
 	void OnMouseDown()
 	{
-		Application.LoadLevel("Level 0");
+		Application.LoadLevel("Tutorial");
 	}
 }
 
