@@ -11,17 +11,8 @@ public class FollowBall : MonoBehaviour
 // Rotate the camera every frame so it keeps looking at the target 
 void Update() 
 	{
-		/* light tracks ball from fixed position when in play */
-		if (BallBehavior.inPlay == true)
-		{
-			light.intensity = 2;
 			target = GameObject.FindGameObjectWithTag("Player").transform.position;
 	   		transform.LookAt(target);
 		}
 		/* turns light off if not in play */
-		else
-		{
-			light.intensity = 0;
-		}
-	}
 }
