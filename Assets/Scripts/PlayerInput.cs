@@ -28,10 +28,8 @@ public class PlayerInput : MonoBehaviour {
 			magnet.State = MagneticSphere.STATES.NONE;
 		}
 		
-		// Point the cone at the mouse
-		if(Input.GetMouseButton(0)){
-			Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
-			transform.LookAt(position);
-		}
+		// Transform ball to look at the mouse
+		Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
+		transform.LookAt(position);
 	}
 }

@@ -3,7 +3,9 @@ using UnityEngine;
 using System.Collections;
 
 public class TriggerParent : MonoBehaviour {
-
+	public string collisionEnterFunction = "handleSphereEnter";
+	public string collisionExitFunction = "handleSphereEnter";
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -16,11 +18,18 @@ public class TriggerParent : MonoBehaviour {
 	
 	// Pass them to the parent
 	void OnTriggerEnter(Collider other){
-		((MagneticSphere)transform.parent.GetComponent("MagneticSphere")).handleSphereEnter(other);
+		transform.parent.SendMessage(collisionEnterFunction, other);
 	}
 	
 	void OnTriggerExit(Collider other){
-		((MagneticSphere)transform.parent.GetComponent("MagneticSphere")).handleSphereExit(other);
+		transform.parent.SendMessage(collisionExitFunction, other);
 	}
 	
+	public void changeCollisionEnterFunction(string newName){
+		collisionEnterFunction = newName;
+	}
+	
+	public void changeCollisionExitFunction(string newName){
+		collisionExitFunction = newName;
+	}
 }

@@ -9,8 +9,8 @@ public class MagneticSphere : MonoBehaviour {
 	public Charge charge = new Charge(Charge.NEUTRAL, 5);
 	
 	// Hold game objects that are within their magnetic fields
-	private HashSet<GameObject> FocusedFieldObjects = new HashSet<GameObject>();
-	private HashSet<GameObject> SphericalFieldObjects = new HashSet<GameObject>();
+	public HashSet<GameObject> FocusedFieldObjects;
+	public HashSet<GameObject> SphericalFieldObjects;
 	
 	// States
 	public enum STATES{
@@ -47,10 +47,21 @@ public class MagneticSphere : MonoBehaviour {
 		// Stop particle system and emitters
 		gameObject.particleSystem.Stop();
 		gameObject.particleEmitter.emit = false;
+		FocusedFieldObjects = new HashSet<GameObject>();
+		SphericalFieldObjects = new HashSet<GameObject>();
+		Invoke("clearFocusedFieldObjects", 0.5F);
+		GameObject capsule = transform.Find("Capsule").gameObject;
+		capsule.AddComponent(typeof(TriggerParent));
+		capsule.SendMessage("changeCollisionEnterFunction", "handleFocusedFieldEnter");
+		capsule.SendMessage("changeCollisionExitFunction", "handleFocusedFieldExit");
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+		if(gameObject.name == "Player"){
+			Debug.Log(FocusedFieldObjects.Count);
+		}
 		if(state == STATES.NONE){
 			return;
 		}
@@ -61,7 +72,7 @@ public class MagneticSphere : MonoBehaviour {
 		}
 		foreach(GameObject obj in magneticObjects){
 			MagneticSphere magSphere = (MagneticSphere)obj.GetComponent("MagneticSphere");
-			if(magSphere.state != STATES.NONE){
+			if(magSphere.state == STATES.SPHERICAL_FIELD){
 				Vector3 force = charge.getForce(magSphere.charge, transform.position,  obj.transform.position);
 				rigidbody.AddForce(force);
 			}
@@ -79,8 +90,11 @@ public class MagneticSphere : MonoBehaviour {
 	}
  
 	// Box collider, keep track of objects in field 
-	void OnTriggerEnter(Collider other){
-		if(other.GetType() == typeof(SphereCollider)){
+	void handleFocusedFieldEnter(Collider other){
+		if(FocusedFieldObjects == null){
+			return;
+		}
+		if(other.tag == "Magnet"){
 			if(other.gameObject.GetComponent("MagneticSphere")){
 				if(!(FocusedFieldObjects.Contains(other.gameObject))){
 					FocusedFieldObjects.Add(other.gameObject);
@@ -89,8 +103,11 @@ public class MagneticSphere : MonoBehaviour {
 		}
 	}
 	
-	void OnTriggerExit(Collider other){
-		if(other.GetType() == typeof(SphereCollider)){
+	void handleFocusedFieldExit(Collider other){
+		if(FocusedFieldObjects == null){
+			return;
+		}
+		if(other.tag == "Magnet"){
 			if(other.gameObject.GetComponent("MagneticSphere")){
 				if(FocusedFieldObjects.Contains(other.gameObject)){
 					FocusedFieldObjects.Remove(other.gameObject);
@@ -101,10 +118,10 @@ public class MagneticSphere : MonoBehaviour {
 
 	// Sphere child collider, keep track of objects in field 
 	public void handleSphereEnter(Collider other){
-		if(other.gameObject.name == this.gameObject.name){
+		if(other.gameObject.name == this.gameObject.name || SphericalFieldObjects == null){
 			return;
 		}
-		if(other.name != "SphericalMagneticShell"){
+		if(other.tag == "Magnet"){
 			if(other.gameObject.GetComponent(typeof(MagneticSphere))){
 				if(!(FocusedFieldObjects.Contains(other.gameObject))){
 					SphericalFieldObjects.Add(other.gameObject);
@@ -114,10 +131,21 @@ public class MagneticSphere : MonoBehaviour {
 	}
 	
 	public void handleSphereExit(Collider other){
-		if(other.name != "SphericalMagneticShell"){
+		if(SphericalFieldObjects == null){
+			return;
+		}
+		if(other.tag == "Magnet"){
 			if(other.gameObject.GetComponent(typeof(MagneticSphere))){
 				SphericalFieldObjects.Remove(other.gameObject);
 			}
 		}
+	}
+	
+	public void setCharge(int cha){
+		charge.Sign = cha;
+	}
+	
+	public void clearFocusedFieldObjects(){
+		FocusedFieldObjects.Clear();
 	}
 }
