@@ -12,3 +12,11 @@ Library/cache
 Library/metadata
 Library/previews
 Library/ScriptAssemblies
+
+Assets/.DS_Store
+
+Assets/Objects/.DS_Store
+
+Library/.DS_Store
+
+ProjectSettings/.DS_Store
