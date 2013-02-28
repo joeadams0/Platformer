@@ -1,5 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LevelComplete.cs">
     <Files>
       <File FileName="Assets\Scripts\LevelComplete.cs" Line="18" Column="29" />
@@ -20,6 +21,18 @@
         <State expanded="True" selected="True" />
       </Pad>
     </Pads>
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Menu Assets/LevelSelect/LevelSelector.cs">
+    <Files>
+      <File FileName="Assets/Menu Assets/LevelSelect/LevelSelector.cs" Line="8" Column="22" />
+      <File FileName="Assets/Scripts/PlayerInput.cs" Line="1" Column="1" />
+      <File FileName="Assets/Menu Assets/Scripts/PlayButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Menu Assets/Scripts/OptionButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Menu Assets/LevelSelect/LevelOver.cs" Line="1" Column="1" />
+      <File FileName="Assets/Menu Assets/Scripts/LSButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Menu Assets/LevelSelect/ChooseLevel.cs" Line="32" Column="50" />
+    </Files>
+>>>>>>> origin/master
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

@@ -22,7 +22,7 @@ public class OptionButton : MonoBehaviour
 	
 	void Start()
 	{
-		renderer.material.color = gre;
+		renderer.material.color = Color.white;
 		music = true; //default to music
 	}
 	
@@ -31,17 +31,18 @@ public class OptionButton : MonoBehaviour
 		RenderSettings.ambientLight = new Color(bslider, bslider, bslider, 1.0f);
 	}
 	
-	void OnMouseOver()
+	void OnMouseEnter()
 	{
+		Debug.Log ("Over");
 		renderer.material.color = mar;
 		if (!played)
-		AudioSource.PlayClipAtPoint (clip, o);
+			AudioSource.PlayClipAtPoint (clip, o);
 		played = true;
 	}
 	
 	void OnMouseExit()
 	{
-		renderer.material.color = gre;
+		renderer.material.color = Color.white;
 		played = false;
 	}
 	
@@ -59,12 +60,16 @@ public class OptionButton : MonoBehaviour
 			bslider = GUI.HorizontalSlider(new Rect(80, 25, 200, 20), bslider, 0.0f, 2.0f);
 			GUI.Label (new Rect(0,50, 75, 75), "Volume");
 			vslider = GUI.HorizontalSlider (new Rect(80, 50, 200, 20), vslider, 0.0f, 1.0f);
-			if(GUI.Button (new Rect(0, 75, 50, 50), "Music"))
+			if(GUI.Button (new Rect(0, 75, 50, 25), "Music"))
 			{
 				//PlayerPref to play music?
 				music = !music;
 				Debug.Log ("Music " + music);
 			}
+			if (!music)
+				GUI.Label (new Rect(75, 75, 50, 50), "Off");
+			else
+				GUI.Label (new Rect(75, 75, 50, 50), "On");
 			if(GUI.Button(new Rect(0, 200, 50, 50), "Close"))
 				optionsopen = !optionsopen;
 		}

@@ -16,11 +16,12 @@ public class PlayButton : MonoBehaviour
 	
 	void Start()
 	{
-		renderer.material.color = gre; //start the buttons off green
+		renderer.material.color = Color.white; //start the buttons off green
 	}
 	
-	void OnMouseOver()
+	void OnMouseEnter()
 	{
+		Debug.Log ("Over");
 		renderer.material.color = mar; //change color
 		//play clip if it hasn't already
 		if (!played)
@@ -31,7 +32,7 @@ public class PlayButton : MonoBehaviour
 	void OnMouseExit()
 	{
 		//reset everything
-		renderer.material.color = gre;
+		renderer.material.color = Color.white;
 		played = false;
 	}
 	

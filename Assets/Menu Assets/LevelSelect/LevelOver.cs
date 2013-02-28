@@ -29,8 +29,8 @@ public class LevelOver : MonoBehaviour {
 		if(collider == tut)
 			Application.LoadLevel ("Tutorial");
 		if(collider == level1)
-			Application.LoadLevel ("Level 1");
+			Application.LoadLevel ("Level1");
 		if(collider == level2)
-			Application.LoadLevel ("Level 2");
+			Application.LoadLevel ("Level2");
 	}
 }

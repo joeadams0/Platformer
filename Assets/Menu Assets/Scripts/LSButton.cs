@@ -16,11 +16,12 @@ public class LSButton : MonoBehaviour
 	
 	void Start()
 	{
-		renderer.material.color = gre; //start the button green
+		renderer.material.color = Color.white; //start the button green
 	}
 	
-	void OnMouseOver()
+	void OnMouseEnter()
 	{
+		Debug.Log ("Over");
 		renderer.material.color = mar; //change on mouseover
 		//play clip once
 		if (!played)
@@ -31,7 +32,7 @@ public class LSButton : MonoBehaviour
 	void OnMouseExit()
 	{
 		//reset values
-		renderer.material.color = gre;
+		renderer.material.color = Color.white;
 		played = false;
 	}
 	
