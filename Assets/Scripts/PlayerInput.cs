@@ -37,6 +37,10 @@ public class PlayerInput : MonoBehaviour {
 			rigidbody.AddForce(new Vector3(-2,0,0));
 		}
 		
+		if(Input.GetKeyUp(KeyCode.Space)){
+			SendMessage("SwitchCharge");
+		}
+		
 		// Transform ball to look at the mouse
 		Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
 		transform.LookAt(position);

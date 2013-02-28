@@ -20,4 +20,11 @@ public class MasterScript : MonoBehaviour {
 	void Update () {
 	
 	}
+	
+	public void Death(){
+		Destroy(player);
+		player = (GameObject)Instantiate(Resources.Load(playerFile));MagneticSphere sph = (MagneticSphere)player.GetComponent(typeof(MagneticSphere));
+		sph.setCharge(Charge.POSITIVE);
+		this.SendMessage("startCamera", player);
+	}
 }

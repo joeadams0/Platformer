@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TriggerParent : MonoBehaviour {
 	public string collisionEnterFunction = "handleSphereEnter";
-	public string collisionExitFunction = "handleSphereEnter";
+	public string collisionExitFunction = "handleSphereExit";
 	
 	// Use this for initialization
 	void Start () {

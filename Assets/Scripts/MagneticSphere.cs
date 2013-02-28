@@ -12,6 +12,10 @@ public class MagneticSphere : MonoBehaviour {
 	public HashSet<GameObject> FocusedFieldObjects;
 	public HashSet<GameObject> SphericalFieldObjects;
 	
+	public Material negativeMaterial;
+	public Material neutralMaterial;
+	public Material positiveMaterial;
+	
 	// States
 	public enum STATES{
 		NONE = 0,
@@ -54,14 +58,10 @@ public class MagneticSphere : MonoBehaviour {
 		capsule.AddComponent(typeof(TriggerParent));
 		capsule.SendMessage("changeCollisionEnterFunction", "handleFocusedFieldEnter");
 		capsule.SendMessage("changeCollisionExitFunction", "handleFocusedFieldExit");
-
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if(gameObject.name == "Player"){
-			Debug.Log(FocusedFieldObjects.Count);
-		}
 		if(state == STATES.NONE){
 			return;
 		}
@@ -143,9 +143,27 @@ public class MagneticSphere : MonoBehaviour {
 	
 	public void setCharge(int cha){
 		charge.Sign = cha;
+		if(charge.Sign == Charge.NEGATIVE){
+			gameObject.renderer.material = negativeMaterial;
+		}
+		else if(charge.Sign == Charge.NEUTRAL){
+			gameObject.renderer.material = neutralMaterial;
+		}
+		else{
+			gameObject.renderer.material = positiveMaterial;
+		}
 	}
 	
 	public void clearFocusedFieldObjects(){
 		FocusedFieldObjects.Clear();
+	}
+	
+	public void SwitchCharge(){
+		if(charge.Sign == Charge.POSITIVE){
+			this.setCharge(Charge.NEGATIVE);
+		}
+		else{
+			setCharge(Charge.POSITIVE);
+		}
 	}
 }
