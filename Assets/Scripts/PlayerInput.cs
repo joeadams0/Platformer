@@ -28,6 +28,15 @@ public class PlayerInput : MonoBehaviour {
 			magnet.State = MagneticSphere.STATES.NONE;
 		}
 		
+		// right
+		if(Input.GetKey(KeyCode.D)){
+			rigidbody.AddForce(new Vector3(2,0,0));
+		}
+		// right
+		else if(Input.GetKey(KeyCode.A)){
+			rigidbody.AddForce(new Vector3(-2,0,0));
+		}
+		
 		// Transform ball to look at the mouse
 		Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
 		transform.LookAt(position);

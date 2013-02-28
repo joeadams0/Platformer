@@ -5,13 +5,14 @@ using System.Collections;
 public class MasterScript : MonoBehaviour {
 	
 	public string playerFile = "Player";
-	GameObject player;
+	public GameObject player;
 	// Use this for initialization
 	void Start () {		
 		if(player == null){
 			player = (GameObject)Instantiate(Resources.Load(playerFile));
 			MagneticSphere sph = (MagneticSphere)player.GetComponent(typeof(MagneticSphere));
 			sph.setCharge(Charge.POSITIVE);
+			this.SendMessage("startCamera", player);
 		}
 	}
 	
